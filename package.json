@@ -1,0 +1,23 @@
+{
+  "name": "pdf-compression-service",
+  "version": "1.0.0",
+  "description": "Open-source PDF compression microservice using Ghostscript",
+  "main": "dist/index.js",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "tsx watch src/index.ts"
+  },
+  "dependencies": {
+    "@fastify/multipart": "^9.0.0",
+    "dotenv": "^16.4.5",
+    "fastify": "^5.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.0.0",
+    "tsx": "^4.0.0"
+  }
+}
+
