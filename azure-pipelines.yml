@@ -8,7 +8,7 @@ pool:
 
 variables:
   dockerRegistryServiceConnection: 'systimastage-basis-auth'
-  azureSubscription: 'Systima'
+  azureSubscription: 'Systima (1bf1235c-4b9e-42e2-8328-32bdab480608)'
   imageRepository: 'file-processor'
   containerRegistry: 'systimastage.azurecr.io'
   appName: 'file-processor-dev'
