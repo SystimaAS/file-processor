@@ -8,7 +8,7 @@ pool:
 
 variables:
   dockerRegistryServiceConnection: 'systimastage-basis-auth'
-  azureSubscription: 'Systima (1bf1235c-4b9e-42e2-8328-32bdab480608)'
+  azureSubscription: 'Systima'
   imageRepository: 'file-processor'
   containerRegistry: 'systimastage.azurecr.io'
   appName: 'file-processor-dev'
@@ -19,7 +19,18 @@ stages:
   jobs:
   - job: Build
     steps:
+    - task: NodeTool@0
+      inputs:
+        versionSpec: '22.x'
+      displayName: 'Install Node.js'
+
+    - script: |
+        npm install
+        npm run build
+      displayName: 'npm install and build'
+
     - task: Docker@2
+      displayName: 'Build and Push'
       inputs:
         command: buildAndPush
         repository: $(imageRepository)
