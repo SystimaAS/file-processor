@@ -10,7 +10,7 @@ import os from 'node:os';
 
 const execFileAsync = promisify(execFile);
 
-const SHARED_SECRET = process.env.COMPRESSION_SERVICE_SECRET;
+const SHARED_SECRET = "bae036e20c0313c7e428fc8de8209aef3dc9a8c9188a4016998592afef91502d"
 const MAX_FILE_SIZE = Number(process.env.MAX_FILE_SIZE) || 25 * 1024 * 1024; // Default 25MB
 
 if (!SHARED_SECRET) {
