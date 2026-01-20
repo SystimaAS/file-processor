@@ -25,6 +25,23 @@ const server = Fastify({
 
 server.register(multipart);
 
+server.get('/health', async (request, reply) => {
+  return {
+    status: 'ok',
+    uptime: process.uptime(),
+    timestamp: new Date().toISOString()
+  };
+});
+
+server.get('/check-gs', async (request, reply) => {
+  try {
+    const { stdout } = await execFileAsync('gs', ['--version']);
+    return { ghostscript: stdout.trim(), status: 'installed' };
+  } catch (err) {
+    return reply.code(500).send({ status: 'missing', error: err });
+  }
+});
+
 server.post('/compress', async (request, reply) => {
   const signature = request.headers['x-signature'] as string;
   const timestamp = request.headers['x-timestamp'] as string;
