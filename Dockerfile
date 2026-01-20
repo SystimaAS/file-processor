@@ -26,14 +26,4 @@ EXPOSE 8080
 
 USER node
 
-CMD sh -c "\
-    echo '--- DIAGNOSTICS START ---'; \
-    echo '1. Current User: '$(whoami); \
-    echo '2. Node Version: '$(node -v); \
-    echo '3. Ghostscript Version: '$(gs --version); \
-    echo '4. Directory Structure:'; \
-    ls -R /app/dist; \
-    echo '5. Environment Check:'; \
-    if [ -z \"\$COMPRESSION_SERVICE_SECRET\" ]; then echo '!!! WARNING: SECRET IS MISSING !!!'; else echo 'Secret is set'; fi; \
-    echo '--- DIAGNOSTICS END. STARTING APP ---'; \
-    node dist/index.js"
+CMD ["node", "dist/index.js"]
