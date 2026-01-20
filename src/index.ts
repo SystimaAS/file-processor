@@ -15,7 +15,7 @@ const MAX_FILE_SIZE = Number(process.env.MAX_FILE_SIZE) || 25 * 1024 * 1024; // 
 
 if (!SHARED_SECRET) {
   console.error('FATAL: COMPRESSION_SERVICE_SECRET is not defined');
-  process.exit(1);
+  // process.exit(1);
 }
 
 const server = Fastify({ 
@@ -198,7 +198,7 @@ function displayBanner() {
 server.listen({ port, host: '0.0.0.0' }, (err, address) => {
   if (err) {
     server.log.error(err);
-    process.exit(1);
+    // process.exit(1);
   }
   displayBanner();
   server.log.info(`Server listening at ${address}`);
