@@ -28,7 +28,7 @@ server.register(multipart);
 server.get('/health', async () => {
   return {
     status: 'ok',
-    version: process.env.BUILD_ID || 'local',
+    image: process.env.DOCKER_CUSTOM_IMAGE_NAME || 'local',
     uptime: process.uptime(),
     timestamp: new Date().toISOString(),
     environment: process.env.NODE_ENV || 'development',
