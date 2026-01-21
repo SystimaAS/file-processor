@@ -25,11 +25,15 @@ const server = Fastify({
 
 server.register(multipart);
 
-server.get('/health', async (request, reply) => {
+server.get('/health', async () => {
   return {
     status: 'ok',
+    version: process.env.BUILD_ID || 'local',
     uptime: process.uptime(),
-    timestamp: new Date().toISOString()
+    timestamp: new Date().toISOString(),
+    environment: process.env.NODE_ENV || 'development',
+    maxFileSize: MAX_FILE_SIZE,
+    memoryUsage: process.memoryUsage().heapUsed
   };
 });
 
