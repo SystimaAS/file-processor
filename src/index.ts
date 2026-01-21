@@ -10,12 +10,12 @@ import os from 'node:os';
 
 const execFileAsync = promisify(execFile);
 
-const SHARED_SECRET = "abc"
+const SHARED_SECRET = process.env.COMPRESSION_SERVICE_SECRET;
 const MAX_FILE_SIZE = Number(process.env.MAX_FILE_SIZE) || 25 * 1024 * 1024; // Default 25MB
 
 if (!SHARED_SECRET) {
   console.error('FATAL: COMPRESSION_SERVICE_SECRET is not defined');
-  // process.exit(1);
+  process.exit(1);
 }
 
 const server = Fastify({ 
@@ -195,12 +195,16 @@ function displayBanner() {
   console.log(banner);
 }
 
-server.listen({ port, host: '0.0.0.0' }, (err, address) => {
-  if (err) {
+async function start() {
+  try {
+    await server.listen({ port, host: '0.0.0.0' });
+    displayBanner();
+    server.log.info(`Server listening at http://0.0.0.0:${port}`);
+  } catch (err) {
     server.log.error(err);
-    // process.exit(1);
+    process.exit(1);
   }
-  displayBanner();
-  server.log.info(`Server listening at ${address}`);
-});
+}
+
+start();
 
